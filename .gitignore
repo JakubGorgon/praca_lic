@@ -93,4 +93,4 @@ target/
 .secrets/
 
 # Local data storage (if not already tracked)
-data/
+data/raw
