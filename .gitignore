@@ -94,3 +94,6 @@ target/
 
 # Local data storage (if not already tracked)
 data/raw
+
+# Idata objects and model objects
+/models/
