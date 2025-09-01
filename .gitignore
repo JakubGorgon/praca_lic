@@ -97,3 +97,6 @@ data/raw
 
 # Idata objects and model objects
 /models/
+
+# word docs
+/docs/

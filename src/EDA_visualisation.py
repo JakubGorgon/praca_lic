@@ -34,14 +34,26 @@ desc_stats.columns = ["Średnia arytmetyczna",
                       "Wartość maksymalna"]
 desc_stats.to_excel("../data/processed/statystyki_opisowe.xlsx")
 
+units = {
+    "EDA": "μS",            # microsiemens
+    "Tętno": "ud./min",         # beats per minute
+    "Temperatura": "°C"     # degrees Celsius
+}
+
 continuous_vars = ["EDA", "Tętno", "Temperatura"]
 fig, axes = plt.subplots(len(continuous_vars), 1, figsize=(20, 16))
+
 for i, var in enumerate(continuous_vars):
     sorted_ids = df.groupby("ID")[var].median().sort_values().index
     sns.boxplot(data=df, x=var, y="ID", palette="coolwarm", order=sorted_ids, ax=axes[i], linewidth=2.5)
-    axes[i].set_xlabel(var, fontsize=16)
+    
+    # Use variable name + unit for x-axis label
+    label = f"{var} ({units[var]})"
+    axes[i].set_xlabel(label, fontsize=16)
+    
     axes[i].set_ylabel("Identyfikator obiektu", fontsize=16)
     axes[i].tick_params(axis='both', labelsize=16)
+
 plt.tight_layout()
 plt.savefig("../reports/figures/4-boxplots-per-participant.png")
 
